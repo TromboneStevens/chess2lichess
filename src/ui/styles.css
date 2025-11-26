@@ -1,0 +1,118 @@
+/* * Centralized CSS file. 
+ * Updated to match Chess.com 'Game Review' button aesthetic.
+ */
+
+/* --- Main Button Styling --- */
+.c2l-button {
+    /* Custom User Colors (Base State) */
+    background-color: #edd6b0 !important;  /* Main beige */
+    color: #b88762 !important;             /* Main brown */
+    
+    /* Border Styling */
+    border: none !important;
+    border-bottom: 4px solid #b88762 !important; 
+    
+    /* Strip native styles */
+    box-shadow: none !important;
+    text-shadow: none !important;
+    background-image: none !important;
+    
+    /* Transitions */
+    transition: background-color 0.2s ease, transform 0.1s ease, border-bottom-width 0.1s, color 0.2s, border-color 0.2s, box-shadow 0.2s !important;
+    cursor: pointer !important;
+}
+
+/* --- Hover State: Manual Color Swaps + Glow --- */
+.c2l-button:hover {
+    /* Lighter Beige Background */
+    background-color: #faebd7 !important; 
+    
+    /* Lighter Brown Text & Border */
+    color: #cda283 !important;
+    border-color: #cda283 !important;
+    
+    /* THE GLOW FIX: 
+       0px x-offset, 0px y-offset (centered)
+       15px blur (softness)
+       rgba(...) (semi-transparent light beige/white color)
+    */
+    box-shadow: 0 0 15px rgba(250, 235, 215, 0.25) !important;
+    
+    /* Remove the filter method */
+    filter: none !important;
+    text-decoration: none !important;     
+}
+
+/* Active/Click State */
+.c2l-button:active {
+    transform: translateY(3px) !important;
+    border-bottom-width: 1px !important;  
+    margin-bottom: 3px !important;        
+    box-shadow: none !important;
+}
+
+/* Loading State */
+.c2l-loading {
+    opacity: 0.8;
+    cursor: wait !important;
+}
+
+/* --- SVG Icon Styling --- */
+.c2l-svg-icon {
+    width: 32px !important;
+    height: 32px !important;
+    display: block;
+}
+
+/* --- DUAL COLOR FIX (With Hover Support) --- */
+
+/* 1. Base State */
+.c2l-circle {
+    fill: #b88762 !important; 
+    transition: fill 0.2s ease !important;
+}
+.c2l-knight {
+    fill: #edd6b0 !important; 
+    transition: fill 0.2s ease !important;
+}
+
+/* 2. Hover State */
+.c2l-button:hover .c2l-circle {
+    fill: #cda283 !important; /* Lighter Brown */
+}
+.c2l-button:hover .c2l-knight {
+    fill: #faebd7 !important; /* Lighter Beige */
+}
+
+/* --- Layout Utility --- */
+.c2l-flex-container {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px !important; 
+    align-items: stretch !important;
+    width: 100% !important;
+}
+
+/* Base styles for both items to ensure they behave well */
+.c2l-flex-item {
+    width: 0 !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    height: auto !important;
+}
+
+/* RATIO LOGIC: Flex 1 vs Flex 2 */
+.c2l-button.c2l-flex-item {
+    flex: 1 1 0 !important; 
+}
+
+.c2l-flex-item:not(.c2l-button) {
+    flex: 2 1 0 !important;
+}
+
+/* Fallback style */
+.c2l-fallback {
+    width: 100%;
+    margin-top: 8px;
+    height: 40px;
+}
