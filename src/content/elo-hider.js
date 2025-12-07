@@ -1,7 +1,7 @@
 /**
  * elo-hider.js
  * Handles hiding ELO ratings based on user preference.
- * Uses CSS injection for performance and stability.
+ * Uses CSS injection to visually replace the rating text.
  */
 
 (function() {
@@ -15,10 +15,23 @@
             if (!existingStyle) {
                 const style = document.createElement("style");
                 style.id = STYLE_ID;
-                // Using visibility: hidden preserves the layout space but hides the text
+                
+                // CSS STRATEGY:
+                // 1. font-size: 0 hides the original text "(1200)"
+                // 2. ::after inserts the replacement text and restores the font size
                 style.textContent = `
                     [data-cy="user-tagline-rating"] {
-                        visibility: hidden !important;
+                        font-size: 0 !important;
+                        display: inline-block;
+                    }
+                    
+                    [data-cy="user-tagline-rating"]::after {
+                        content: '(hidden)';
+                        font-size: 13px !important;  /* Restore visible size */
+                        font-style: italic !important;
+                        color: #888888 !important;   /* Grey */
+                        visibility: visible !important;
+                        margin-left: 4px;
                     }
                 `;
                 (document.head || document.documentElement).appendChild(style);
